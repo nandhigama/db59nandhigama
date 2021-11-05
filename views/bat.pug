@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  p Bat results
+  div(class="container-fluid")
+        div(class="row")
+            -
+                let items  = [
+                    {
+                        "batBrand": "SS",
+                        "batCost": 120,
+                        "batWeight": 10
+                    },
+                    {
+                        "batBrand": "Nike",
+                        "batCost": 99,
+                        "batWeight": 20
+                    },
+                    {
+                        "batBrand": "MRF",
+                        "batCost": 79,
+                        "batWeight": 15
+                    },                   
+                ]
+            each b,index in items
+                div(class="col-sm-2" onclick=`buy(${index})`) #{b.batBrand}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{b.batCost}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{b.batWeight}
+
+                script.                
+                      function buy(item)
+                      {
+                            alert(`You purchased item ${item+1}`)
+                      }
