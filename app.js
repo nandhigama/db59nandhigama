@@ -15,7 +15,7 @@ mongoose.connect(connectionString, {
 //server start
 async function recreateDB(){
  // Delete everything
- await Costume.deleteMany();
+ await Bat.deleteMany();
  let instance1 = new
   Bat({
           batBrand: "SS",
