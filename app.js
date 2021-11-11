@@ -3,6 +3,52 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var Bat = require("./models/bat");
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+// We can seed the collection if needed on
+//server start
+async function recreateDB(){
+ // Delete everything
+ await Costume.deleteMany();
+ let instance1 = new
+  Bat({
+          batBrand: "SS",
+          batCost: 120,
+          batWeight: 10
+  });
+  let instance2 = new
+  Bat({
+          batBrand: "Nike",
+          batCost: 99,
+          batWeight: 20
+  });
+  let instance3 = new
+  Bat({
+         batBrand: "MRF",
+         batCost: 79,
+        batWeight: 15
+  });  
+  instance1.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("First object saved")
+  });
+  instance2.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Second object saved")
+  });
+  instance3.save(function (err, doc) {
+    if (err) return console.error(err);
+    console.log("Third object saved")
+  });
+}
+let reseed = true;
+if (reseed) { recreateDB();}
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -45,3 +91,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
