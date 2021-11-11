@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var Bat = require("./models/bat");
+var resource = require("./models/resource");
 const connectionString = process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString, {
@@ -55,6 +56,8 @@ var usersRouter = require('./routes/users');
 var batRouter = require('./routes/bat');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var batRouter = require('./routes/bat');
+
 
 var app = express();
 
