@@ -32,7 +32,21 @@ exports.bat_delete = function (req, res) {
 };
 // Handle Bat update form on PUT.
 exports.bat_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: Bat update PUT' + req.params.id);
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Bat.findById(req.params.id)
+        // Do updates of properties
+        if (req.body.batBrand)
+            toUpdate.batBrand = req.body.batBrand;
+        if (req.body.batCost) toUpdate.batCost = req.body.batCost;
+        if (req.body.batWeight) toUpdate.batWeight = req.body.batWeight;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}failed`);
+    }
 };
 
 // List of all Bat
@@ -58,5 +72,16 @@ exports.bat_view_all_Page = async function (req, res) {
     } catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
+    }
+};
+// for a specific Bat.
+exports.bat_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Bat.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };

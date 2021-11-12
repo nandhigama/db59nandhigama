@@ -12,3 +12,5 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+// GET request for one bat.
+router.get('/bat/:id', bat_controlers.bat_detail);
