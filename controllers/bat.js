@@ -31,7 +31,7 @@ exports.bat_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Bat delete DELETE ' + req.params.id);
 };
 // Handle Bat update form on PUT.
-exports.bat_update_put = function (req, res) {
+exports.bat_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
     try {
         let toUpdate = await Bat.findById(req.params.id)
