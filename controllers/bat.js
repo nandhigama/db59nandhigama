@@ -97,3 +97,55 @@ exports.bat_delete = async function(req, res) {
     res.send(`{"error": Error deleting ${err}}`);
     }
    };
+   // Handle a show one view with id specified by query
+exports.bat_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Bat.findById( req.query.id)
+    res.render('batdetail',
+   { title: 'Bat Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+   // Handle building the view for creating a bat.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.bat_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('batcreate', { title: 'Bat Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+   // Handle building the view for updating a bat.
+// query provides the id
+exports.bat_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await Bat.findById(req.query.id)
+    res.render('batupdate', { title: 'Bat Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+   // Handle a delete one view with id from query
+exports.bat_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Bat.findById(req.query.id)
+    res.render('batdelete', { title: 'Bat Delete', toShow:
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };

@@ -1,0 +1,38 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='BatForm', action="/resource/bat", method="POST") 
+    div.form-group 
+        label.batAttr(for='batBrand')  Bat Brand
+        input#batBrand(type='text', name='batBrand') 
+    div.form-group 
+        label.batAttr(for='batCost') Bat Cost
+        input#batCost(type='text', name='batCost') 
+    div.form-group 
+        label.batAttr(for='batWeight') Bat Weight
+        input#batWeight(type='number', name='batWeight') 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['BatForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 
+
+
+
+

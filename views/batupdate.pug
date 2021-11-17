@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let batid = toShow._id 
+  - let batBrand = toShow.batBrand 
+  - let batCost = toShow.batCost 
+  - let batWeight = toShow.batWeight 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{batid} 
+  - let actionid = "/resource/bat/" + batid 
+  form(id='BatForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.batAttr(for='batBrand') Bat Brand
+        input#batBrand(type='text', name='batBrand', value= batBrand ) 
+    div.form-group 
+        label.batAttr(for='size') Bat Cost
+        input#size(type='text', name='size', value= batWeight ) 
+    div.form-group 
+        label.batAttr(for='cost') Bat Weight
+        input#cost(type='number', name='cost', value= batCost ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['BatForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
+
+
