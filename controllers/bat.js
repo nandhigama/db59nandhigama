@@ -85,3 +85,15 @@ exports.bat_detail = async function (req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
+// Handle Bat delete on DELETE.
+exports.bat_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Bat.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
