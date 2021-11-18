@@ -2,18 +2,26 @@ extends layout
 
 block content
   h1= title
-  - let bats = results; 
+  - let bat = results; 
   table(class="table table-stripped table-bordered")
-        thead(style="background-color:yellow;") 
+        thead(style="background-color:red; color:green;font-size:20px;font-family:calibri;") 
             tr
                 td Bat ID
-                td Bat Brand
-                td Bat Cost
-                td Bat Weight
+                td BatBrand
+                td BatCost
+                td BatWeight 
+                td Update
         tbody 
-            each bat in bats 
+            each bat in bat
+                - let destination = `dispatch(\"/bat/update?id=${bat._id}\")`
                 tr
                     td #{bat._id}
-                    td #{bat.batBrand}
-                    td #{bat.batCost}
-                    td #{bat.batWeight}
+                    td #{bat.BatBrand}
+                    td #{bat.BatCost}
+                    td #{bat.BatWeight}
+                    td
+                      button.btn( class="btn-primary ml-1", onclick= destination) Update
+                script.
+                    function dispatch(path){
+                      window.location.href=path
+                    }
