@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
   - let bats = results; 
+  button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/bat/create\")`) Create
   table(class="table table-stripped table-bordered")
         thead(style="background-color:red; color:black;font-size:20px;font-family:calibri;") 
             tr
@@ -11,6 +12,8 @@ block content
                 td BatCost
                 td BatWeight 
                 td Update
+                td Details 
+                td Delete
         tbody 
             each bat in bats
                 - let destination = `dispatch(\"/bat/update?id=${bat._id}\")`
@@ -21,6 +24,10 @@ block content
                     td #{bat.batWeight}
                     td
                       button.btn( class="btn-primary ml-1", onclick= destination) Update
+                    td
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/bat/detail?id=${bat._id}\")`) Details
+                    td
+                      button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/bat/delete?id=${bat._id}\")`) Delete
                 script.
                     function dispatch(path){
                       window.location.href=path

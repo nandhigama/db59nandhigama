@@ -6,7 +6,7 @@ block content
   form(id='BatForm', action="/resource/bat", method="POST") 
     div.form-group 
         label.batAttr(for='batBrand')  Bat Brand
-        input#batBrand(type='text', name='batBrand') 
+        input#batBrand(type='text', name='batBrand',minlength="4",maxlength="11") 
     div.form-group 
         label.batAttr(for='batCost') Bat Cost
         input#batCost(type='text', name='batCost') 
