@@ -2,9 +2,9 @@ extends layout
 
 block content
   h1= title
-  - let bat = results; 
+  - let bats = results; 
   table(class="table table-stripped table-bordered")
-        thead(style="background-color:red; color:green;font-size:20px;font-family:calibri;") 
+        thead(style="background-color:red; color:black;font-size:20px;font-family:calibri;") 
             tr
                 td Bat ID
                 td BatBrand
@@ -12,13 +12,13 @@ block content
                 td BatWeight 
                 td Update
         tbody 
-            each bat in bat
+            each bat in bats
                 - let destination = `dispatch(\"/bat/update?id=${bat._id}\")`
                 tr
                     td #{bat._id}
-                    td #{bat.BatBrand}
-                    td #{bat.BatCost}
-                    td #{bat.BatWeight}
+                    td #{bat.batBrand}
+                    td #{bat.batCost}
+                    td #{bat.batWeight}
                     td
                       button.btn( class="btn-primary ml-1", onclick= destination) Update
                 script.

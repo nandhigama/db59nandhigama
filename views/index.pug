@@ -1,14 +1,14 @@
-extends layout
-
-block content
-  h1= title
-  p Creating for Lab 11
-  button(type='button' class='btn btn-info' onClick="update()") Press Me
-  div(id="target") Display
-  script.
-    var client_count=0;
-    function update(){
-      client_count=client_count+1;
-      document.getElementById("target").innerHTML=`Value now ${client_count}`;
-    }
-  a(href='bat') Bat
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+    br 
+    a(href="/bat/update") Update
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/bat") Take me to Bat App 
+    br 
+    a(href="/logout") Logout 
